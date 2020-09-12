@@ -23,30 +23,53 @@ script.
       })
     }
 
-
+    // turn all emojis to darkened mode
     // change opacities
     $('.react img').css({
       opacity: '0.4'
     })
-    $(this).css({
-      opacity: 0.85
-    })
+
+    // make the
+    //    $(this).css({
+    //      opacity: 0.85
+    //    })
 
     // note active emoji
     var oldEmoji = activeEmoji
+
+    console.log(oldEmoji + 'old emoji');
+
+
+
     var emoji = $(this).attr('id')
+
+
+    console.log(emoji + ' emoji');
+
     activeEmoji = emoji;
+
+    console.log(activeEmoji + ' active emoji');
 
     var unreact = (oldEmoji == activeEmoji) // the old react is the same as the new (user wants to remove react)
 
+    console.log('should unreact emoji')
+
+    // the content was already reacted to, we need to decrement
     // decrement old emoji if needed
     if(oldEmoji){
-      var oldEmojiValue = $('p.' + oldEmoji).text()
-      console.log(oldEmojiValue)
 
-      console.log('running!');
+      // find the value of a paragraph of the active emoji
+      var oldEmojiValue = $($('p.' + activeEmoji)[0]).text()
+
+
+
+
+      console.log(oldEmojiValue + ' old emoji value')
+
 
       var decrementedValue = parseInt(oldEmojiValue) - 1
+
+
       var updateEmoji = $('p.' + oldEmoji).text(decrementedValue)
 
     }
@@ -58,12 +81,17 @@ script.
         opacity: 0.85
       })
 
+      // aka it's not a removal of a react
       // if user chose a different react, update the new react value
     } else {
 
-      console.log('running!!!');
+      console.log('new react emoji');
 
-      var newEmojiValue = $('p.' + emoji).text()
+      var newEmojiValue = $($('p.' + emoji)[0]).text()
+
+      console.log('new emoji value ' + newEmojiValue)
+
+
       var incrementedValue = parseInt(newEmojiValue) + 1
       console.log(newEmojiValue)
       var updatedEmojiValue = $('p.' + emoji).text(incrementedValue)
